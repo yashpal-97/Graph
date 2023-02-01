@@ -37,7 +37,37 @@ bool detect(int src,vector<int>adj[],int vis[]){
     }
 
 
+//---------------------------------------------------Time Complexity: O(N + 2E) + O(N)--------------------SC==O(N)------------------------
 
+
+ bool detect(int src,int parent,vector<int>adj[],int vis[]){
+        vis[src]=1;
+        for(auto it:adj[src]){
+            if(!vis[it]){
+                
+                if(detect(it,src,adj,vis)){
+                    return true;
+                }
+            }
+                else if(it!=parent){
+                    return true;
+                }
+            
+        }
+        return false;
+    }
+    bool isCycle(int V, vector<int> adj[]) {
+        // Code here
+        int vis[V]={0};
+        for(int i=0;i<V;i++){
+            if(!vis[i]){
+                if(detect(i,-1,adj,vis)){
+                return  true;
+                }
+            }
+        }
+        return false;
+    }
 
 
 
